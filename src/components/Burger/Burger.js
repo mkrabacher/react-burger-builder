@@ -4,14 +4,18 @@ import BurgerIngrediant from './BurgerIngrediant/BurgerIngrediant';
 import './Burger.scss'
 
 const burger = (props) => {
+
+  let fixins = [];
+  fixins = Object.keys(props.fixins).map(fixinKey => {
+   return  [...Array(props.fixins[fixinKey])].map((_, i) => {
+      return <BurgerIngrediant key={fixinKey + i} type={fixinKey}/>;
+    })
+    
+  });
+
   return (
     <div className="Burger">
-      <BurgerIngrediant type="bread-top"/>
-      <BurgerIngrediant type="lettuce"/>
-      <BurgerIngrediant type="bacon"/>
-      <BurgerIngrediant type="cheese"/>
-      <BurgerIngrediant type="meat"/>
-      <BurgerIngrediant type="bread-bottom"/>
+      {fixins}
     </div>
   );
 }
