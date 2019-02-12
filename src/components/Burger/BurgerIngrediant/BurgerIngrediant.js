@@ -29,11 +29,11 @@ const burgerIngrediant = (props) => {
     case ('bacon'):
       ingrediant = <div className={'Bacon'}></div>
       break;
+    default:
+        ingrediant = null;
   }
 
-  render() {
-    return ();
-  }
+    return ingrediant;
 }
 
 export default burgerIngrediant;
