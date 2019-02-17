@@ -13,8 +13,8 @@ const controls = [
 
 const buildControls = (props) => (
   <div className='BuildControls'>
-  <h3>Burger Price: {props.price}</h3>
-  
+    <h3>Burger Price: {props.price}</h3>
+
     {controls.map(fixin => {
       return <BuildControl
         disabled={props.disabledInfo[fixin.type]}
@@ -24,6 +24,7 @@ const buildControls = (props) => (
         key={fixin.label}
         label={fixin.label} />
     })}
+    <button disabled={!props.purchasable} className='OrderButton'>Order Now</button>
   </div>
 
 )
