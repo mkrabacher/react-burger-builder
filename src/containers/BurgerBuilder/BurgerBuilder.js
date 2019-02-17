@@ -68,9 +68,8 @@ class BurgerBuilder extends Component {
     return (
       <Aux>
         <Burger fixins={this.state.fixins}/>
-        <h3>{this.state.totalPrice}</h3>
-        <div>Build Controls</div>
-        <BuildControls
+        <BuildControls 
+          price = {this.state.totalPrice}
           disabledInfo={disabledInfo}
           addFixinHandler={this.addFixinHandler}
           removeFixinHandler={this.removeFixinHandler}/>
