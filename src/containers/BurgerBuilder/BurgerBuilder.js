@@ -50,9 +50,9 @@ class BurgerBuilder extends Component {
     }
     updatedFixins[type] = updatedCount;
     
-    const priceAddition = INGREDIENT_PRICES[type];
+    const priceDeduction = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice - priceAddition;
+    const newPrice = oldPrice - priceDeduction;
     console.log('newpirrce: ', newPrice)
 
     this.setState({fixins: updatedFixins, totalPrice: newPrice});    
