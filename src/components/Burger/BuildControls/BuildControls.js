@@ -15,6 +15,7 @@ const buildControls = (props) => (
   <div className='BuildControls'>
     {controls.map(fixin => {
       return <BuildControl
+        disabled={props.disabledInfo[fixin.type]}
         more={() => props.addFixinHandler(fixin.type)}
         less={() => props.removeFixinHandler(fixin.type)}
         type={fixin.type}

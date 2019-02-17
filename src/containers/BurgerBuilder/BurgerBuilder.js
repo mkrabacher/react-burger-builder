@@ -33,17 +33,17 @@ class BurgerBuilder extends Component {
     updatedFixins[type] = updatedCount;
     
     const priceAddition = INGREDIENT_PRICES[type];
-    console.log('priceAddition: ', priceAddition)
     const oldPrice = this.state.totalPrice;
-    console.log('oldPrice: ', oldPrice)
     const newPrice = oldPrice + priceAddition;
-    console.log('newpirrce: ', newPrice)
 
     this.setState({fixins: updatedFixins, totalPrice: newPrice});
   }
   
   removeFixinHandler = (type) => {
     const oldCount = this.state.fixins[type];
+    if (oldCount <= 0 ) {
+      return;
+    }
     const updatedCount = oldCount - 1;
     const updatedFixins = {
       ...this.state.fixins
@@ -53,19 +53,25 @@ class BurgerBuilder extends Component {
     const priceDeduction = INGREDIENT_PRICES[type];
     const oldPrice = this.state.totalPrice;
     const newPrice = oldPrice - priceDeduction;
-    console.log('newpirrce: ', newPrice)
 
     this.setState({fixins: updatedFixins, totalPrice: newPrice});    
   }
   
 
   render () {
+    const disabledInfo = {
+      ...this.state.fixins
+    }
+    for (let key in disabledInfo) {
+       disabledInfo[key] = this.state.fixins[key] > 0 ? false : true;
+    }
     return (
       <Aux>
         <Burger fixins={this.state.fixins}/>
         <h3>{this.state.totalPrice}</h3>
         <div>Build Controls</div>
         <BuildControls
+          disabledInfo={disabledInfo}
           addFixinHandler={this.addFixinHandler}
           removeFixinHandler={this.removeFixinHandler}/>
       </Aux>
