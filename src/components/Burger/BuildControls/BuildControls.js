@@ -14,7 +14,12 @@ const controls = [
 const buildControls = (props) => (
   <div className='BuildControls'>
     {controls.map(fixin => {
-      return <BuildControl key={fixin.label} label={fixin.label}/>
+      return <BuildControl
+        more={() => props.addFixinHandler(fixin.type)}
+        less={() => props.removeFixinHandler(fixin.type)}
+        type={fixin.type}
+        key={fixin.label}
+        label={fixin.label} />
     })}
   </div>
 
