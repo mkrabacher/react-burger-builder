@@ -30,7 +30,6 @@ class BurgerBuilder extends Component {
     for(let key in fixins) {
       totalFixins += fixins[key]
     }
-    console.log('totalFixins', totalFixins)
     this.setState({ purchasable: totalFixins > 0});
   }
 
