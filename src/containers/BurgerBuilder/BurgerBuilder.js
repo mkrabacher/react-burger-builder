@@ -40,7 +40,7 @@ class BurgerBuilder extends Component {
     this.setState({purchaseMode : this.state.purchaseMode ? false : true})
   }
 
-  cancelOrder = () => {
+  closeOrder = () => {
     this.setState({ purchaseMode: false })
   }
 
@@ -88,8 +88,8 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={this.state.purchaseMode}>
-          <OrderSummary cancelOrder={this.cancelOrder} fixins={this.state.fixins} />
+        <Modal show={this.state.purchaseMode} modalClosed={this.closeOrder}>
+          <OrderSummary cancelOrder={this.closeOrder} fixins={this.state.fixins} />
         </Modal>
         <Burger fixins={this.state.fixins}/>
         <BuildControls 
