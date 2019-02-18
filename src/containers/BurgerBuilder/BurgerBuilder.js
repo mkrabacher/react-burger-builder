@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Burger from '../../components/Burger/Burger';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls'
-import Aux from '../../hoc/AuxWrapper'
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Aux from '../../hoc/AuxWrapper';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
   'bread-top': 0.5,
@@ -23,6 +25,7 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 0,
     purchasable: false,
+    purchaseMode: false,
   }
 
   updatePurchaseState(fixins) {
@@ -31,6 +34,10 @@ class BurgerBuilder extends Component {
       totalFixins += fixins[key]
     }
     this.setState({ purchasable: totalFixins > 0});
+  }
+
+  purchaseHandler = () => {
+    this.setState({purchaseMode : this.state.purchaseMode ? false : true})
   }
 
   addFixinHandler = (type) => {
@@ -77,10 +84,14 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
+        <Modal show={this.state.purchaseMode}>
+          <OrderSummary fixins={this.state.fixins} />
+        </Modal>
         <Burger fixins={this.state.fixins}/>
         <BuildControls 
-          purchasable= {this.state.purchasable}
-          price = {this.state.totalPrice}
+          purchasable={this.state.purchasable}
+          purchaseHandler={this.purchaseHandler}
+          price={this.state.totalPrice}
           disabledInfo={disabledInfo}
           addFixinHandler={this.addFixinHandler}
           removeFixinHandler={this.removeFixinHandler}/>

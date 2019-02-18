@@ -24,7 +24,12 @@ const buildControls = (props) => (
         key={fixin.label}
         label={fixin.label} />
     })}
-    <button disabled={!props.purchasable} className='OrderButton'>Order Now</button>
+    <button
+      disabled={!props.purchasable}
+      onClick={props.purchaseHandler}
+      className='OrderButton'>
+        Order Now
+      </button>
   </div>
 
 )
