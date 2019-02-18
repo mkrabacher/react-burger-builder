@@ -37,11 +37,16 @@ class BurgerBuilder extends Component {
   }
 
   purchaseHandler = () => {
-    this.setState({purchaseMode : this.state.purchaseMode ? false : true})
+    this.setState({purchaseMode : this.state.purchaseMode ? false : true});
   }
 
-  closeOrder = () => {
-    this.setState({ purchaseMode: false })
+  purchaseContinueHandler = () => {
+    alert('its ordered');
+    this.setState({purchaseMode : false});
+  }
+
+  purchaseCancelHandler = () => {
+    this.setState({ purchaseMode: false });
   }
 
   addFixinHandler = (type) => {
@@ -88,8 +93,12 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={this.state.purchaseMode} modalClosed={this.closeOrder}>
-          <OrderSummary cancelOrder={this.closeOrder} fixins={this.state.fixins} />
+        <Modal show={this.state.purchaseMode} modalClosed={this.purchaseCancelHandler}>
+          <OrderSummary
+            checkout={null}
+            purchaseCancel={this.purchaseCancelHandler}
+            purchaseContinue={this.purchaseContinueHandler}
+            fixins={this.state.fixins} />
         </Modal>
         <Burger fixins={this.state.fixins}/>
         <BuildControls 

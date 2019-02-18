@@ -1,5 +1,6 @@
 import React from 'react';
 import Aux from '../../../hoc/AuxWrapper';
+import Button from '../../UI/Button/Button';
 
 const orderSummary = (props) => {
   const fixins = Object.keys(props.fixins)
@@ -13,8 +14,9 @@ const orderSummary = (props) => {
       <ul>
         {fixins}
       </ul>
-      <p>Contrinue to Checkout?</p>
-      <p onClick={props.cancelOrder}>Cancel</p>
+      
+      <Button btnType="Danger" clicked={props.purchaseContinue}>Contrinue to Checkout?</Button>
+      <Button btnType="Success" clicked={props.purchaseCancel}>Cancel</Button>
     </Aux>
   )
 };
