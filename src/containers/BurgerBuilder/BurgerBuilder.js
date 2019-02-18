@@ -40,6 +40,10 @@ class BurgerBuilder extends Component {
     this.setState({purchaseMode : this.state.purchaseMode ? false : true})
   }
 
+  cancelOrder = () => {
+    this.setState({ purchaseMode: false })
+  }
+
   addFixinHandler = (type) => {
     const oldCount = this.state.fixins[type];
     const updatedCount = oldCount + 1;
@@ -85,7 +89,7 @@ class BurgerBuilder extends Component {
     return (
       <Aux>
         <Modal show={this.state.purchaseMode}>
-          <OrderSummary fixins={this.state.fixins} />
+          <OrderSummary cancelOrder={this.cancelOrder} fixins={this.state.fixins} />
         </Modal>
         <Burger fixins={this.state.fixins}/>
         <BuildControls 

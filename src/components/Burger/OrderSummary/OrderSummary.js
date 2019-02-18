@@ -14,6 +14,7 @@ const orderSummary = (props) => {
         {fixins}
       </ul>
       <p>Contrinue to Checkout?</p>
+      <p onClick={props.cancelOrder}>Cancel</p>
     </Aux>
   )
 };
