@@ -14,7 +14,8 @@ const orderSummary = (props) => {
       <ul>
         {fixins}
       </ul>
-      
+
+      <h5>Price: {props.price}</h5>
       <Button btnType="Danger" clicked={props.purchaseContinue}>Contrinue to Checkout?</Button>
       <Button btnType="Success" clicked={props.purchaseCancel}>Cancel</Button>
     </Aux>
