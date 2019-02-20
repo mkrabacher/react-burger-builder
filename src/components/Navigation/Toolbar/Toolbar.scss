@@ -13,6 +13,13 @@
   z-index: 90;
 
   nav {
+    display: none;
+  }
+}
+
+@media (min-width: 500px) {
+  .Toolbar nav {
+    display: block;
     height: 100%;
   }
 }
