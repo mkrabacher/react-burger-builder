@@ -2,10 +2,12 @@ import React from 'react';
 import Aux from '../../hoc/AuxWrapper';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import './Layout.scss';
+import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 const layout = (props) => (
   <Aux>
     <Toolbar />
+    <SideDrawer />
     <main className='Content'>
       {props.children}
     </main>
