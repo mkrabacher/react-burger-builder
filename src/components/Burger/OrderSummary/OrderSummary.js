@@ -16,8 +16,8 @@ const orderSummary = (props) => {
       </ul>
 
       <h5>Price: {props.price}</h5>
-      <Button btnType="Danger" clicked={props.purchaseContinue}>Contrinue to Checkout?</Button>
-      <Button btnType="Success" clicked={props.purchaseCancel}>Cancel</Button>
+      <Button btnType="Success" clicked={props.purchaseContinue}>Continue to Checkout?</Button>
+      <Button btnType="Danger" clicked={props.purchaseCancel}>Cancel</Button>
     </Aux>
   )
 };
