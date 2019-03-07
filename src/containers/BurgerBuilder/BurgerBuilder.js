@@ -5,6 +5,7 @@ import Aux from '../../hoc/AuxWrapper';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axiosInstance from '../../axios';
+import Loading from '../../components/UI/Loading/Loading'
 
 const INGREDIENT_PRICES = {
   'bread-top': 0.5,
@@ -25,6 +26,7 @@ class BurgerBuilder extends Component {
       'bread-bottom': 0,
     },
     totalPrice: 0,
+    loading: false,
     purchasable: false,
     purchaseMode: false,
   }
@@ -46,10 +48,20 @@ class BurgerBuilder extends Component {
       fixins: this.state.fixins,
       totalPrice: this.state.totalPrice,
     }
-    axiosInstance.post('/orders.json', burger)
-      .then(response => console.log(response))
-      .catch(error => console.error('Matt, You caught one: ', error));
-    this.setState({purchaseMode : false});
+    this.setState({loading: true})
+    
+    setTimeout(() => {
+      axiosInstance.post('/orders.json', burger)
+      .then(response => {
+        console.log(response);
+        this.setState({purchaseMode : false, loading: false});
+      })
+      .catch(error => {
+        console.error('Matt, You caught one: ', error)
+        this.setState({purchaseMode : false, loading: false});
+      });
+    }, 1000);
+    
   }
 
   purchaseCancelHandler = () => {
@@ -98,15 +110,22 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
        disabledInfo[key] = this.state.fixins[key] > 0 ? false : true;
     }
+    let orderSummary = (
+      <OrderSummary
+        checkout={null}
+        purchaseCancel={this.purchaseCancelHandler}
+        purchaseContinue={this.purchaseContinueHandler}
+        price={this.state.totalPrice}
+        fixins={this.state.fixins} />
+    )
+    if (this.state.loading) {
+      orderSummary = (<Loading />)
+    }
+
     return (
       <Aux>
         <Modal show={this.state.purchaseMode} modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary
-            checkout={null}
-            purchaseCancel={this.purchaseCancelHandler}
-            purchaseContinue={this.purchaseContinueHandler}
-            price={this.state.totalPrice}
-            fixins={this.state.fixins} />
+          {orderSummary}
         </Modal>
         <Burger fixins={this.state.fixins}/>
         <BuildControls 
